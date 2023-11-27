@@ -13,6 +13,10 @@
         <span th:errors="${employer.name}" class="error"></span>
     </div>
 
+<!--    A user will select an employer when they create a job. Add the employer data from employerRepository into the -->
+<!--    form template. The add job form already includes an employer selection option. Be sure your variable name for the -->
+<!--    employer data matches that already used in templates/add.-->
+
     <div class="form-group">
         <label th:for="location">Employer Location</label>
         <input class="form-control" th:field="${employer.location}" />

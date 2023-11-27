@@ -16,15 +16,13 @@ public class Employer extends AbstractEntity {
     @Size(min = 1, max = 75, message = "Location must be between 1 and 75 characters long")
     private String location;
 
-    // is mappedBy needed here? And am I using @JoinColumn correctly here?
     @OneToMany
     @JoinColumn(name = "employer_id")
-    private List<Job> jobs = new ArrayList<>();
+    private final List<Job> jobs = new ArrayList<>();
 
     public Employer(String location) {
         this.location = location;
     }
-
 
     public Employer() {}
 
@@ -36,5 +34,8 @@ public class Employer extends AbstractEntity {
         this.location = location;
     }
 
+    public List<Job> getJobs() {
+        return jobs;
+    }
 }
 
