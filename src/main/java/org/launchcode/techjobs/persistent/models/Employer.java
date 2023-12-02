@@ -13,7 +13,7 @@ import java.util.List;
 public class Employer extends AbstractEntity {
 
     @NotBlank(message = "Location is required")
-    @Size(min = 3, max = 15, message = "size must be between 3 and 15")
+    @Size(min = 1, max = 75, message = "Location must be between 1 and 75 characters long")
     private String location;
 
     @OneToMany
@@ -37,6 +37,10 @@ public class Employer extends AbstractEntity {
 
     public List<Job> getJobs() {
         return jobs;
+    }
+
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
     }
 }
 

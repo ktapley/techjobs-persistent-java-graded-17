@@ -59,6 +59,7 @@ public class HomeController {
         if (errors.hasErrors()) {
             return "add";
         }
+//
         model.addAttribute("employerId", employerId);
         model.addAttribute("newJob", newJob);
         model.addAttribute("employer", employerRepository.findAll());
@@ -73,14 +74,15 @@ public class HomeController {
             model.addAttribute("title", "invalid Skill");
         }
 
-        Optional<Employer> result = employerRepository.findById(employerId);
+//        Optional<Employer> result = employerRepository.findById(employerId);
+//        Optional<Employer> result = employerRepository.findById(employerId);
 
-        if (result.isPresent()) {
-            Employer employer = result.get();
+        if (employerRepository.findById(employerId).isPresent()) {
+            Employer employer = employerRepository.findById(employerId).get();
             newJob.setEmployer(employer);
         }
         // Is this line right??
-        if(result.isEmpty()) {
+        if(employerRepository.findById(employerId).isEmpty()) {
          model.addAttribute("title", "Invalid Employer ID");
         }
 
@@ -90,13 +92,16 @@ public class HomeController {
     }
 
 
-
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
 
-        model.addAttribute("job", jobRepository.findById(jobId));
-        model.addAttribute("employer", employerRepository);
-        model.addAttribute("skill", skillRepository);
+        model.addAttribute("jobId", jobId);
+        model.addAttribute("job", jobRepository.findAll());
+
+        if (jobRepository.findById(jobId).isPresent()) {
+            Job job = jobRepository.findById(jobId).get();
+            model.addAttribute("job", job);
+        }
 
             return "view";
     }
