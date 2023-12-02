@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
 import java.util.Objects;
 
 @MappedSuperclass
@@ -18,8 +19,15 @@ public abstract class AbstractEntity {
     private int id;
 
     @NotBlank
-    @Size(max=75)
+    @Size(min = 3, max = 50, message = "size must be between 3 and 50")
     private String name;
+
+    public AbstractEntity(Employer employer, List<Skill> skills) {
+    }
+
+    public AbstractEntity() {
+
+    }
 
     public int getId() {
         return id;

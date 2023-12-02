@@ -68,14 +68,21 @@ public class HomeController {
         List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
         newJob.setSkills(skillObjs);
 
+        // Is this line right??
+        if (skillObjs.isEmpty()) {
+            model.addAttribute("title", "invalid Skill");
+        }
+
         Optional<Employer> result = employerRepository.findById(employerId);
 
         if (result.isPresent()) {
             Employer employer = result.get();
             newJob.setEmployer(employer);
         }
-
-//        model.addAttribute("employer", newJob.getEmployer());
+        // Is this line right??
+        if(result.isEmpty()) {
+         model.addAttribute("title", "Invalid Employer ID");
+        }
 
         jobRepository.save(newJob);
 
@@ -88,7 +95,8 @@ public class HomeController {
     public String displayViewJob(Model model, @PathVariable int jobId) {
 
         model.addAttribute("job", jobRepository.findById(jobId));
-
+        model.addAttribute("employer", employerRepository);
+        model.addAttribute("skill", skillRepository);
 
             return "view";
     }

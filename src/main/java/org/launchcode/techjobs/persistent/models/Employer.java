@@ -13,12 +13,13 @@ import java.util.List;
 public class Employer extends AbstractEntity {
 
     @NotBlank(message = "Location is required")
-    @Size(min = 1, max = 75, message = "Location must be between 1 and 75 characters long")
+    @Size(min = 3, max = 15, message = "size must be between 3 and 15")
     private String location;
 
     @OneToMany
     @JoinColumn(name = "employer_id")
     private List<Job> jobs = new ArrayList<>();
+//    private List<Job> jobs = new ArrayList<>();
 
     public Employer(String location) {
         this.location = location;
