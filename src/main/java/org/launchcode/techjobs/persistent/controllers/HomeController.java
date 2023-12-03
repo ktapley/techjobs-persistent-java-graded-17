@@ -74,9 +74,6 @@ public class HomeController {
             model.addAttribute("title", "invalid Skill");
         }
 
-//        Optional<Employer> result = employerRepository.findById(employerId);
-//        Optional<Employer> result = employerRepository.findById(employerId);
-
         if (employerRepository.findById(employerId).isPresent()) {
             Employer employer = employerRepository.findById(employerId).get();
             newJob.setEmployer(employer);
